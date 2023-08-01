@@ -1,0 +1,1 @@
+This is a restaurant app based in React, MERN Stack.
