@@ -1,24 +1,25 @@
-body {
+ body {
     font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 100vh;
     background: linear-gradient(45deg, #ea4f4c 0%, #6d0019 100%);
+    width: 100vw;
   }
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
   
   .navigationWrapper {
-    position: fixed; /* Set the position to 'fixed' to position it at the top */
-    top: 0; /* Stick it to the top of the page */
-    left: 0; /* Stick it to the left side of the page */
+    /* position: relatives; Set the position to 'fixed' to position it at the top */
+    /* top: 0; Stick it to the top of the page */
+    /* left: 0; Stick it to the left side of the page */
     width: 100%; /* Set the width to 100% to span the entire page */
     height: 5%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 20px;
     background-color: #222;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
@@ -109,45 +110,7 @@ body {
           font-size: 17px;
           padding: 0 5px;
         }
-      }
+      } 
 
     
   
-  
-  /* .active.parent {
-    transform: translate(-40px, -25px);
-    .link {
-      font-size: 12px;
-  
-      .fa-minus {
-        opacity: 1 !important;
-        font-size: 8px;
-      }
-  
-      .fa-plus {
-        opacity: 0 !important;
-      }
-    }
-  
-    .subnavigation {
-      display: flex;
-    }
-  }
-  
-  .active#clients {
-    .subnavigation {
-      transform: translate(-150px, 17px);
-    }
-  }
-  
-  .active#services {
-    .subnavigation {
-      transform: translate(-290px, 17px);
-    }
-  }
-  
-  .invisible {
-    opacity: 0 !important;
-    transform: translate(50px, 0);
-  }
-   */

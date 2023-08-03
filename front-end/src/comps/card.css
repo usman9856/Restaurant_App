@@ -1,0 +1,64 @@
+.card {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 250px; /* Adjust width to your preference */
+    height: 270px; /* Adjust height to your preference */
+    display: flex; /* To create a flex container */
+    align-items: center; /* To center content vertically */
+    flex-direction: column;
+    margin: 25px;
+    box-shadow: 5px 5px 30px 0px black;
+    transition: transform 0.5s; /* Add transition for smooth effect */
+  }
+  
+  .card:hover {
+    cursor: pointer;
+    transform: translate(0px, 7.5px); /* Move the card slightly up and left on hover */
+    box-shadow: 5px 5px 30px 0px black; /* You can also modify the box-shadow on hover */
+  }
+
+/* .card {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 250px; 
+    height: 270px;
+    display: flex;
+    align-items: center; 
+    flex-direction: column;
+    margin: 25px;
+    box-shadow: 5px 5px 30px 0px black;
+
+    &:hover{
+        cursor: pointer;
+        box-shadow: 5px 5px 30px 0px black;
+
+    }
+  } */
+  
+  .card h3 {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    margin: 0;
+  }
+  .card h4{
+    color: red;
+    margin: 5px;
+  }
+  
+  #image {
+    width: 150px;
+    height: 120px;
+    background-color: white;
+    border: solid red;
+    flex-shrink: 0; /* Prevent image from shrinking */
+
+  }

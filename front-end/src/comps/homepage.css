@@ -1,0 +1,30 @@
+#header {
+    background-color: #222;
+    /* height: 125px; */
+    padding: 0;
+    margin: 0;
+    color: white;
+  }
+  
+  /* Styles for the body */
+  #body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 20px;
+  }
+  
+  /* Styles for the footer */
+  #footer {
+    background-color: #333; /* Adjust color to your preference */
+    padding: 10px;
+    color: white;
+    text-align: center;
+  }
+
+  /* header{
+    background-color: #222;
+    height: 125px;
+    padding: 0;
+    margin: 0;
+  } */
