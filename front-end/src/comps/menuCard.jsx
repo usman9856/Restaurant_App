@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import "./card.css"
+import "./css/card.css"
+
+// const [mData,setMData] = useState([])
+
+
 function MCard(props) {
   const [imageLoaded, setImageLoaded] = useState(false);
 

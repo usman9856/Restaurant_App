@@ -1,0 +1,40 @@
+.fbody{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.info1{
+    color: whitesmoke;
+    font-size: medium;
+    font-weight: 400;
+    
+}
+
+ul li{
+    margin: 5px;
+    cursor: pointer;
+    &:hover{
+    color: red;
+    }
+}
+
+.icons {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    /* Other styling for the icons container */
+  }
+
+.icon {
+    width: 32px; /* Adjust the width to your desired size */
+    height: 32px; /* Adjust the height to your desired size */
+    margin: 5px; /* Add spacing between icons if needed */
+    cursor: pointer;
+    transition: transform 0.3s ease
+}
+
+.icon:hover{
+    transform:scale(1.2)
+}

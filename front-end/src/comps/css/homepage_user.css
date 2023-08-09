@@ -1,3 +1,11 @@
+  body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(45deg, #ea4f4c 0%, #6d0019 100%);
+    width: 100vw;
+  }
 #header {
     background-color: #222;
     /* height: 125px; */

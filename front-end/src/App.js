@@ -1,4 +1,4 @@
-import Homepage from './comps/homepage';
+import Homepage from './comps/homepage_user';
 import './App.css';
 
 function App() {

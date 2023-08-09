@@ -1,6 +1,9 @@
 import MCard from "./menuCard"
 import NavbarComponent from "./nav"
-import "./homepage.css"
+import "./css/homepage_user.css"
+import Resdetail from "./footer"
+
+
 
 export default function Homepage(){
     //for now let it be. but we are going to change the lenth to not allow more than 100 letters for detail.
@@ -9,7 +12,7 @@ export default function Homepage(){
         <>
 
         <div id="header">
-        <NavbarComponent/>
+        <NavbarComponent type={1}/>
         </div>
 
         <body>
@@ -30,7 +33,7 @@ export default function Homepage(){
         </body>        
         <footer>
         <div id="footer">
-
+           <Resdetail/>
         </div>
         </footer>
         </>
