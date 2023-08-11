@@ -1,5 +1,5 @@
 import MCard from "./menuCard"
-import NavbarComponent from "./nav"
+import {NavbarComponent_user} from "./nav"
 import "./css/homepage_user.css"
 import Resdetail from "./footer"
 
@@ -12,11 +12,16 @@ export default function Homepage(){
         <>
 
         <div id="header">
-        <NavbarComponent type={1}/>
+        <NavbarComponent_user type={1}/>
         </div>
 
         <body>
         <div id="body">
+            <p>Pending: Items for front end user:</p>
+            <ul>
+                <li>user icon menu options</li>
+                <li>js functionalities</li>
+            </ul>
          <MCard title="Lobster" detail={detail} price = "$200"/>  
          <MCard title="Lobster" detail={detail} price = "$200"/>  
          <MCard title="Lobster" detail={detail} price = "$200"/>  

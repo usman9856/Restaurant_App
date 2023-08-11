@@ -1,0 +1,28 @@
+.display{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Style for the textarea */
+textarea {
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* Allow vertical resizing of textarea */
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Adjust the placeholder color */
+::placeholder {
+    color: #999;
+}
