@@ -1,12 +1,10 @@
 import Homepage from './comps/homepage_user';
 import './App.css';
-import AdminPage from './comps/homepage_admin';
-
+import React from 'react';
 function App() {
-return (
-  // <Homepage/>
-  <AdminPage/>
-)
+  return (
+    <Homepage/>   
+  )
 }
 
 export default App;

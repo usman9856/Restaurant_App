@@ -1,33 +1,29 @@
-import React, { useState } from 'react';
+import  { React,useState } from 'react';
 import "./css/card.css"
 
-// const [mData,setMData] = useState([])
+
 
 
 function MCard(props) {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  // const [imageLoaded, setImageLoaded] = useState(false);
 
-  function loadImage(title) {
-    import(title)
-      .then((image) => {
-        setImageLoaded(true);
-      })
-      .catch((error) => {
-        console.error('Error loading image:', error);
-      });
-  }
+  // function loadImage(title) {
+  //   import(title)
+  //     .then((image) => {
+  //       setImageLoaded(true);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error loading image:', error);
+  //     });
+  // }
 
-  let img = './' + props.title + '.jpg';
-
+  // let img = './img' + props.title + '.jpg';
   
   return (
     <>
       <div className="row">
         <div className="column">
-          <div className="card">
-            <h3>{props.title}</h3>
-            <div id='image'>
-                <img src={img} alt="My Image" />
+          {/* <img src={img} alt={props.title} /> */}
               {/* {imageLoaded ? (
               ) : (
                 <button onClick={() => loadImage(img)}>Load Image</button>
@@ -36,8 +32,6 @@ function MCard(props) {
             <p>{props.detail}</p>
             <h4><center>{props.price}</center></h4>
           </div>
-        </div>
-      </div>
     </>
   );
 }

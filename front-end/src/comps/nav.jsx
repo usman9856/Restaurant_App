@@ -1,7 +1,10 @@
 import "./css/nav.css"
 import user from "./icons/user_.png"
-import { useState } from "react"
+import React from "react"
+
 function NavbarComponent_user(props){
+
+
     if(props.type===0){
         return(
             <>
@@ -23,8 +26,10 @@ function NavbarComponent_user(props){
                     <li class="parent"><a class="link" href="#">Contact</a></li>
                 </ul>
                 <ul className="navigation">
-                    <li className=""><a className="link" href="#">Login</a></li>
-                    <li className=""><a className="link" href="#">Signup</a></li>
+                    <li>Login</li>
+                    <li>Signup</li>
+                    {/* <li><button><Link to="/Login" element={<Login/>}>Login</Link></button></li>
+                    <li><button><Link to="/Signup" element={<Signup/>}>Signup</Link></button></li> */}
                 </ul>
             </nav>
     </>
@@ -60,6 +65,7 @@ function NavbarComponent_user(props){
 }
 
 function NavbarComponent_admin(props) {
+
     if(props.type===0){
         return(
             <>
@@ -81,8 +87,10 @@ function NavbarComponent_admin(props) {
                     <li class="parent"><a class="link" href="#">Contact</a></li>
                 </ul>
                 <ul className="navigation">
-                    <li className=""><a className="link" href="#">Login</a></li>
-                    <li className=""><a className="link" href="#">Signup</a></li>
+                    <li>Login</li>
+                    <li>Signup</li>
+                    {/* <li className=""><button><Link to="/Login">Login</Link></button></li>
+                    <li className=""><button><Link to="/Signup">Signup</Link></button></li> */}
                 </ul>
             </nav>
     </>
@@ -117,38 +125,18 @@ function NavbarComponent_admin(props) {
     }
 }
 
-function NavbarComponent_admin_detail() {
-    const [selectedOption, setSelectedOption] = useState('Restaurant');
-
-    const handleOptionClick = (option) => {
-        setSelectedOption(option);
-    };
+function NavbarComponent_admin_detail({ selectedOption, handleOptionChange }) {
 
     return (
-
-            <nav className='admin_detail'>
-                <ul id='admin-func'>
-                    <li
-                        className={selectedOption === 'Restaurant' ? 'active' : ''}
-                        onClick={() => handleOptionClick('Restaurant')}
-                    >
-                        Restaurant
-                    </li>
-                    <li
-                        className={selectedOption === 'Pickup' ? 'active' : ''}
-                        onClick={() => handleOptionClick('Pickup')}
-                    >
-                        Pickup
-                    </li>
-                    <li
-                        className={selectedOption === 'Delivery' ? 'active' : ''}
-                        onClick={() => handleOptionClick('Delivery')}
-                    >
-                        Delivery
-                    </li>
-                </ul>
-            </nav>
+      <nav className='admin_detail'>
+        <ul id='admin-func'>
+          <li className={selectedOption === 'Restaurant' ? 'active' : ''} onClick={() => handleOptionChange('Restaurant')}>Restaurant</li>
+          <li className={selectedOption === 'Pickup' ? 'active' : ''} onClick={() => handleOptionChange('Pickup')}>Pickup</li>
+          <li className={selectedOption === 'Delivery' ? 'active' : ''} onClick={() => handleOptionChange('Delivery')}>Delivery</li>
+        </ul>
+      </nav>
     );
-}
+  }
+  
 
 export {NavbarComponent_user,NavbarComponent_admin,NavbarComponent_admin_detail}
