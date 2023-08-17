@@ -17,13 +17,17 @@ function MCard(props) {
   //     });
   // }
 
-  // let img = './img' + props.title + '.jpg';
+  let img = './' + props.title + '.jpg';
+
   
   return (
     <>
       <div className="row">
         <div className="column">
-          {/* <img src={img} alt={props.title} /> */}
+          <div className="card">
+            <h3>{props.title}</h3>
+            <div id='image'>
+                <img src={img} alt="My Image" />
               {/* {imageLoaded ? (
               ) : (
                 <button onClick={() => loadImage(img)}>Load Image</button>
@@ -32,6 +36,8 @@ function MCard(props) {
             <p>{props.detail}</p>
             <h4><center>{props.price}</center></h4>
           </div>
+        </div>
+      </div>
     </>
   );
 }

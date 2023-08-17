@@ -1,7 +1,9 @@
+// import { Route, Routes, Link } from 'react-router-dom';
 import MCard from "./menuCard"
 import {NavbarComponent_user} from "./nav"
 import "./css/homepage_user.css"
 import Resdetail from "./footer"
+// import Signup from './signup';
 import React from "react"
 
 

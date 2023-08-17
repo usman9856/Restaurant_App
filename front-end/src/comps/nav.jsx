@@ -1,6 +1,9 @@
 import "./css/nav.css"
 import user from "./icons/user_.png"
 import React from "react"
+// import Login from './login';
+// import Signup from './signup';
+// import {Link} from 'react-router-dom';
 
 function NavbarComponent_user(props){
 
@@ -87,8 +90,6 @@ function NavbarComponent_admin(props) {
                     <li class="parent"><a class="link" href="#">Contact</a></li>
                 </ul>
                 <ul className="navigation">
-                    <li>Login</li>
-                    <li>Signup</li>
                     {/* <li className=""><button><Link to="/Login">Login</Link></button></li>
                     <li className=""><button><Link to="/Signup">Signup</Link></button></li> */}
                 </ul>
