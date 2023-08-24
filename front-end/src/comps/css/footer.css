@@ -22,15 +22,14 @@ ul li{
 
 .icons {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    /* Other styling for the icons container */
+    justify-content: center; 
+    align-items: center; 
   }
 
 .icon {
-    width: 32px; /* Adjust the width to your desired size */
-    height: 32px; /* Adjust the height to your desired size */
-    margin: 5px; /* Add spacing between icons if needed */
+    width: 32px; 
+    height: 32px; 
+    margin: 5px; 
     cursor: pointer;
     transition: transform 0.3s ease
 }

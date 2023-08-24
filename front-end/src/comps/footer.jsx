@@ -2,6 +2,8 @@ import "./css/footer.css"
 import facebook from "./icons/facebook.png"
 import instagram from "./icons/instagram.png"
 import twitter from "./icons/twitter.png"
+import React from "react"
+
 export default function Resdetail(){
 return (
     <>

@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.progress-bar-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 300px; 
+}
+
+.tick-image {
+    max-width: 80px; 
+    max-height: 80px;
+}
+.progress-divider {
+    margin: 10px 0; 
+    text-align: center;
+    font-size: 16px;
+   
+}
