@@ -1,5 +1,5 @@
-import  { React,useState } from 'react';
-import { NavbarComponent_admin, NavbarComponent_admin_detail } from './nav';
+import React, { useState } from 'react';
+import {  NavbarComponent_detail } from './nav';
 import './css/homepage_admin.css';
 import Display_Content from './display-content';
 
@@ -34,7 +34,7 @@ function AdminPage() {
   const getDataForSelectedOption = () => {
     if (selectedOption === 'Restaurant') {
       return restaurantData;
-    } else if (selectedOption === 'Pickup') {
+    } else if (selectedOption === 'Takeaway') {
       return pickupData;
     } else if (selectedOption === 'Delivery') {
       return deliveryData;
@@ -44,12 +44,10 @@ function AdminPage() {
 
   return (
     <>
-      <div className='admin_head'>
-        <NavbarComponent_admin type={1} />
-      </div>
+ 
       <div className='admin_body'>
         <center>
-          <NavbarComponent_admin_detail
+          <NavbarComponent_detail
             selectedOption={selectedOption}
             handleOptionChange={handleOptionChange}
           />
@@ -71,74 +69,3 @@ function AdminPage() {
 }
 
 export default AdminPage;
-
-
-
-// import React, { useState } from 'react';
-// import { NavbarComponent_admin, NavbarComponent_admin_detail } from './nav';
-// import './css/homepage_admin.css';
-// import Display_Content from './display-content';
-// function AdminPage() {
-//   const [selectedOption, setSelectedOption] = useState('Restaurant');
-//   const handleOptionChange = (option) => {
-//     setSelectedOption(option);
-//   };
-//   return (
-//     <>
-//       <div className='admin_head'>
-//         <NavbarComponent_admin type={1} />
-//       </div>
-//       <div className='admin_body'>
-//         <center>
-//           <NavbarComponent_admin_detail
-//             selectedOption={selectedOption}
-//             handleOptionChange={handleOptionChange}
-//           />
-//           {selectedOption === 'Restaurant' && (
-//             <Display_Content
-//               Dish="Red Lobster"
-//               order_id="R0010"
-//               employee="Adam"
-//               time_date="8/11/2023-6:19PM"
-//               price={200}
-//             />   
-//             )}
-//         </center>
-//       </div>
-//       <div className='admin_foot'></div>
-//     </>
-//   );
-// }
-// export default AdminPage;
-
-
-
-
-
-// import { NavbarComponent_admin,NavbarComponent_admin_detail } from './nav'
-// import './css/homepage_admin.css';
-// import Display_Content from './display-content';
-// function AdminPage(){
-//     return(
-//         <>
-//         <div className='admin_head'>
-//             <NavbarComponent_admin type={1}/>         
-//         </div>
-//         <div className='admin_body'>
-//             <center>
-//             <NavbarComponent_admin_detail/>
-//             <Display_Content Dish="Red Lobster" order_id="R0010" employee="Adam" time_date="8/11/2023-6:19PM" price={200}/>
-//             <Display_Content Dish="Red Lobster" order_id="R0010" employee="Adam" time_date="8/11/2023-6:19PM" price={200}/>
-//             <Display_Content Dish="Red Lobster" order_id="R0010" employee="Adam" time_date="8/11/2023-6:19PM" price={200}/>
-//             <Display_Content Dish="Red Lobster" order_id="R0010" employee="Adam" time_date="8/11/2023-6:19PM" price={200}/>
-//             <Display_Content Dish="Red Lobster" order_id="R0010" employee="Adam" time_date="8/11/2023-6:19PM" price={200}/>
-//             <Display_Content Dish="Red Lobster" order_id="R0010" employee="Adam" time_date="8/11/2023-6:19PM" price={200}/>
-//             </center>
-
-//         </div>
-//         <div className='admin_foot'>
-//         </div>
-//         </>
-//     )
-// }
-// export default AdminPage

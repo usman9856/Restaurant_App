@@ -19,7 +19,7 @@ export default function Homepage(){
     return (
         <>
         <div id="header">
-        <NavbarComponent_user type={0}/>
+        {/* <NavbarComponent_user type={0}/> */}
         </div>
         <body>
         <div id="body">
