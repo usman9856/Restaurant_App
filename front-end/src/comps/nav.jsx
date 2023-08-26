@@ -10,7 +10,7 @@ function NavbarComponent({userType}) {
     const userNavDetails = [
         { label: "Home", path: "/" },
         { label: "Order", path: "/order" },
-        { label: "Track", path: "/track-order" },
+        // { label: "Track", path: "/track-order" },
         { label: "Contact", path: "/contact" }
     ];
 
