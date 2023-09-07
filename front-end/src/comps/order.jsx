@@ -1,8 +1,13 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
 import "./css/order.css";
-
+import { useNavigate } from 'react-router-dom';
 function Order_Detail() {
+
+  const loggedIn = window.localStorage.getItem("isLoggedIn");
+    const isAdmin = window.localStorage.getItem("isAdmin");
+    const navigate = useNavigate(); // Hook for navigation
+
     const columns = [
         {
             name: 'Sr.',
@@ -59,7 +64,10 @@ function Order_Detail() {
         )
     }));
 
-    return (
+
+    
+    if (loggedIn && isAdmin === 'user') {
+      return (
         <>
             <div className="container">
                 <DataTable
@@ -124,6 +132,15 @@ function Order_Detail() {
             </div>
         </>
     );
+  } else if (!loggedIn) {
+      return(
+        <>
+        <h1 id='user-guide'>Login to view history</h1>
+        <hr />
+        </>
+      )
+  } 
+
 }
 
 export default Order_Detail;

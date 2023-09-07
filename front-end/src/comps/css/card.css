@@ -41,7 +41,18 @@
 
   }
 
-  .M-Card-btn {
-    margin: 2.5px;
-    width: 80px;
-  }
+ .bx-des{
+  border: solid 1px black;
+  width: 207px;
+    height: 176px;
+
+ }
+
+ .bx-act{
+  border: solid 1px black;
+ }
+
+ .img-size{
+  width: 150px !important;
+  height: 150px !important;
+ }

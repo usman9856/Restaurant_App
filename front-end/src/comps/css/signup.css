@@ -12,6 +12,7 @@
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
+    /* width: 250px !important; */
   }
   
   .signup-box h2 {
@@ -40,3 +41,6 @@
     background-color: #555;
   }
   
+  .input-box{
+    margin: 5px 0px 5px 0px;
+  }
