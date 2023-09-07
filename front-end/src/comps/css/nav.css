@@ -1,3 +1,4 @@
+/* CSS for navigation bar */
 .navigationWrapper {
   width: 100%;
   height: 5%;
@@ -10,102 +11,92 @@
   text-transform: uppercase;
   overflow: hidden;
 }
-
 .logoWrapper {
   display: flex;
-
-  .stylish {
-    font-weight: bold;
-  }
-
-  .logo {
-    padding-left: 4px;
-    color: #ea4f4c;
-  }
+  font-weight: bold;
+  color: #ea4f4c;
+  padding-left: 4px;
 }
-
 .navigation {
   display: flex;
-  list-style-type: none;
-}
+  flex-direction: row-reverse;
+  list-style: none;
 
-li {
-  opacity: 1;
-  list-style-type: none;
-  color: white;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
 }
+.navigation1 {
+  display: flex;
+  list-style: none;
 
+}
 .parent {
   padding: 0 10px;
   cursor: pointer;
   margin: 15px;
 }
-
 .link {
-  position: relative;
-  display: flex;
-  align-items: center;
   text-decoration: none;
-  transition: all 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
   color: white;
-
-  &:hover {
-    color: red;
-  }
+}
+.link:hover {
+  color: red;
 }
 
-&:hover {
-  color: #ea4f4c;
+
+/* CSS for buttons */
+.btn-ca{
+  border-radius: 30px;
+}
+.btn-c{
+  width: 68px;
+  height: 44px;
+  border-radius:20px ;
+}
+.space{
+  margin-right: 50px;
+
+}
+.btn-u{
+  border-radius: 30px;
+}
+.btn-u:hover {
+  color: white;
 }
 
-.fa-minus {
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  position: absolute;
-  left: -16px;
-  top: 3px;
-}
 
-.fa-plus {
-  opacity: 1;
-  transition: all 0.3s ease-in-out;
+/* Reset default link styles */
+.btn-u a {
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
 }
-
-.fas {
-  color: #ea4f4c;
-  margin: -2px 4px 0;
-  font-size: 10px;
-  transition: all 0.3s ease-in-out;
+.btn-u a:hover {
+  text-decoration: underline;
+  /* color: red; */
 }
-
-.subnavigation {
-  display: none;
+ul.logo-list {
   list-style-type: none;
-  width: 500px;
-  position: absolute;
-  top: 40%;
-  left: 25%;
-  margin: auto;
-  transition: all 0.3s ease-in-out;
-  background-color: #222;
-
-  li a {
-    font-size: 17px;
-    padding: 0 5px;
-  }
+  /* Remove bullet points */
 }
-
-.navigation .link i {
-  margin-right: 5px;
+.logoWrapper {
+  display: flex;
+  font-weight: bold;
+  color: #ea4f4c;
+  padding-left: 4px;
 }
-
-.navigation .icon img {
-  background-color: whitesmoke;
+.cart-icon {
   width: 30px;
+  /* Set your desired width */
   height: 30px;
-  border-radius: 20px;
-
+  /* Set your desired height */
+}
+.signout-button {
+  width: 100px;
+  /* Set your desired width */
+  height: 30px;
+  /* Set your desired height */
+}
+.icon {
+  margin-right: 10px; /* Add some right margin to create space */
 }
 

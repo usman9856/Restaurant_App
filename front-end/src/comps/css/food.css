@@ -1,0 +1,101 @@
+body {
+  overflow-x: hidden;
+}
+
+/* Assuming you have a main container with the class 'main' */
+.fd-main {
+  width: 100%;
+  /* padding: px; */
+  /* Add padding as needed */
+  box-sizing: border-box;
+
+}
+
+/* Style the header section */
+.head-food {
+  background-color: #333;
+  color: white;
+  /* Text color for the header */
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Style the 'Add Item' button */
+.btn-add {
+  background-color: #007bff;
+  /* Button background color */
+  color: white;
+  /* Button text color */
+  border: none;
+  /* padding: 10px 20px; Adjust padding as needed */
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.btn-edit {
+  background-color: #ffff00;
+  /* Button background color */
+  color: white;
+  /* Button text color */
+  border: none;
+  /* padding: 10px 20px; Adjust padding as needed */
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.btn-remove {
+  background-color: #ff0000;
+  /* Button background color */
+  color: white;
+  /* Button text color */
+  border: none;
+  /* padding: 10px 20px; Adjust padding as needed */
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+/* Add some spacing below the header */
+.head-food+hr {
+  margin-top: 20px;
+}
+
+/* Style the DataTable container */
+
+#guide {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  /* font-weight: 400; */
+  font-size: 40px;
+  padding: 10px;
+}
+
+.tb-container {
+  width: 100% !important;
+  padding: 5px;
+}
+/* ////////////////////////////////////////////////// */
+.rdt_Table {
+  border: solid 1px black;
+  padding: 5px;
+}
+
+
+/* Adjust column widths */
+.rdt_Table {
+  table-layout: fixed;
+  width: 100%; /* Make the table take the full width of its container */
+}
+
+.rdt_TableCol_Sortable {
+  width: auto; /* Allow other columns to adjust dynamically */
+}
+
+
+/* Add media queries for responsiveness */
+@media (max-width: 768px) {
+  /* Define styles for smaller screens if necessary */
+}

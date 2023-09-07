@@ -3,44 +3,59 @@ import './css/login.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('user');
   const navigate = useNavigate(); // Hook for navigation
 
-  const handleUser = () => {
-    // Implement your login logic here
-    // Then navigate to the user's home page
-    navigate('/');
-  };
+  const handleUser = async (e) => {
+    e.preventDefault()
+    let result = await fetch("http://localhost:5000/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password,role}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
-  const handleAdmin = () => {
-    // Implement your admin login logic here
-    // Then navigate to the admin page
+    result = await result.json();
+    console.warn(result);
 
-    navigate('/homepage_admin');
+    if (result.message) {
+      localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("isAdmin",result.role)
+      // window.localStorage.removeItem("isLoggedIn");
+      // alert(result.message); // Show the error message to the user
+      navigate('/');
+    } else if (result.error) {
+      alert(result.error); // Show the success message to the user
+    }
   };
 
   return (
     <div className="login-container">
-      <div className="login-box">
+      <form onSubmit={handleUser} className="login-box">
         <h2>Login</h2>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+        <input className='input-box'
+        required
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <input
+        <input className='input-box'
+        required
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className='login-btn'>
-          <button onClick={handleUser}>Login as User</button>
-          <button onClick={handleAdmin}>Login as Admin</button>
+          <span className='login-guide'><Link to={"/login_admin"}><p>Login as Admin</p></Link><Link to='./forgot_pass'><p>Forgot Password</p></Link></span>
+          <button className='input-box'>Login as User</button>
+          {/* <button className='input-box' onClick={handleAdmin}>Login as Admin</button> */}
         </div>
-      </div>
+      </form>
     </div>
   );
 };

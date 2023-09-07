@@ -1,16 +1,5 @@
-/* order.css */
-.container {
-    padding: 20px;
-}
-
-/* This will edit the header */
-.beICJd{
-    /* justify-content: center; */
-    background-color: transparent;
-    
-}
-/* This will edit the rows and data */
-.hRfGpm{
-    /* justify-content: center; */
-    background-color: transparent;
+#user-guide{
+    display: flex;
+    justify-content: center;
+    font-family:'Times New Roman', Times, serif ;
 }

@@ -12,6 +12,8 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
+  width: 500px !important;
+  height: 300px !important;
 }
 
 .login-box h2 {
@@ -44,4 +46,14 @@ button:hover {
 .login-btn {
   display: flex;
   flex-direction: column;
+}
+
+.input-box{
+  margin: 5px 0px 5px 0px;
+}
+
+.login-guide{
+  display: flex;
+  justify-content: space-between;
+  
 }

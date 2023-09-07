@@ -1,28 +1,38 @@
 import "./css/nav.css";
 import user from "./icons/user_.png";
+import cart from "./icons/cart.png";
 import React, { useState } from "react";
 import Login from './login';
 import Signup from './signup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+function NavbarComponent() {
+    const loggedIn = window.localStorage.getItem("isLoggedIn");
+    const isAdmin = window.localStorage.getItem("isAdmin");
+    const navigate = useNavigate(); // Hook for navigation
 
-function NavbarComponent({userType}) {
+    const handleSignout = () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.setItem("isAdmin", 'user');
+        
+        navigate('/');
+    }
+
     const userNavDetails = [
         { label: "Home", path: "/" },
         { label: "Order", path: "/order" },
-        { label: "Track", path: "/track-order" },
         { label: "Contact", path: "/contact" }
     ];
 
     const adminNavDetails = [
+        { label: "Home", path: "/homepage_admin" },
         { label: "Food", path: "/food" },
         { label: "Employee", path: "/employee" },
-        { label: "Finance", path: "/finance" }
     ];
 
     return (
         <nav className="navigationWrapper">
-            <ul>
+            <ul className="logo-list">
                 <li>
                     <div className="logoWrapper">
                         <span className="stylish">Stylish</span>
@@ -30,28 +40,30 @@ function NavbarComponent({userType}) {
                     </div>
                 </li>
             </ul>
-            <ul className="navigation">
-                {(userType === 0 ? userNavDetails : adminNavDetails).map((item, index) => (
+            <ul className="navigation1">
+                {(isAdmin === "user" ? userNavDetails : adminNavDetails).map((item, index) => (
                     <li key={index} className="parent">
                         <Link to={item.path} className="link">{item.label}</Link>
                     </li>
                 ))}
             </ul>
-            {userType === 0 ? (
-                <ul className="navigation">
-                    <li>
-                        <button><Link to="/login" element={<Login />}>Login</Link></button>
-                    </li>
-                    <li>
-                        <button><Link to="/signup" element={<Signup />}>Signup</Link></button>
-                    </li>
-                </ul>
+            {loggedIn ? (
+                // className="navigation" 
+                <ul className="navigation" >
+                <li  >
+                  <button className="btn-ca" onClick={handleSignout} onTer>Sign out</button>
+                </li>
+                <li >
+                  <button className="btn-c" ><img className="cart-icon" src={cart} alt="user cart" /></button>
+                </li>
+              </ul>
             ) : (
-                <ul className="navigation">
-                    <li className="icon">
-                        <a className="link" href="#">
-                            <img src={user} alt="user icon" />
-                        </a>
+                <ul className="navigation1">
+                    <li>
+                        <button className="btn-u"><Link to="/login" element={<Login />}>Login</Link></button>
+                    </li>
+                    <li>
+                        <button className="btn-u"><Link to="/signup" element={<Signup />}>Signup</Link></button>
                     </li>
                 </ul>
             )}
@@ -59,9 +71,7 @@ function NavbarComponent({userType}) {
     );
 }
 
-
 function NavbarComponent_detail({ selectedOption, handleOptionChange }) {
-
     return (
         <nav className='admin_detail'>
             <ul id='admin-func'>
@@ -73,5 +83,4 @@ function NavbarComponent_detail({ selectedOption, handleOptionChange }) {
     );
 }
 
-
-export { NavbarComponent, NavbarComponent_detail}
+export { NavbarComponent, NavbarComponent_detail };
