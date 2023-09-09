@@ -1,59 +1,49 @@
+/* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-.admin_body {
+  }
+  
+  /* Main container for the admin page */
+  .admin_body {
     width: 95%;
     height: auto;
-    margin: 10px 10px 10px 10px ;
+    margin: 10px;
+  }
   
-    
-}
-
-.admin_detail {
+  /* Container for the admin functions/navigation */
+  .admin_detail {
     width: 90%;
     display: flex;
     justify-content: space-around;
-    border-bottom:solid 1px #fff ;
-}
-
-#admin-func {
-    width: 100%;
-    display: flex;
-}
-
-
-#admin-func li {
+    border-bottom: solid 1px #fff;
+  }
+  
+  /* Styling for the navigation options */
+  #admin-func li {
     list-style: none;
     padding: 10px;
     cursor: pointer;
     position: relative;
-}
-
-
-#admin-func li::before {
+  }
+  
+  /* Underline effect for active navigation option */
+  #admin-func li.active::before {
     content: '';
     position: absolute;
     width: 100%;
     height: 2px;
-    background-color: #007bff; 
+    background-color: #007bff;
     bottom: 0;
     left: 0;
-    transform: scaleX(0);
+    transform: scaleX(1);
     transform-origin: bottom left;
-    transition: transform 0.3s ease; 
-}
-
-
-#admin-func li.active::before {
-    transform: scaleX(1); 
-}
-
-
-
-.content-body{
+    transition: transform 0.3s ease;
+  }
+  
+  /* Content body styling */
+  .content-body {
     width: 80%;
     padding: 30px;
     border: solid 2px black;
@@ -62,7 +52,37 @@
     box-shadow: 0px 0px 20px 0px black;
     border-radius: 25px;
     transition: transform 0.5s;
-    &:hover{
-        transform:  scale(1.2)
-    }
-}
+  }
+  
+  /* Hover effect for content body */
+  .content-body:hover {
+    transform: scale(1.2);
+  }
+  
+  /* Status styles based on order status */
+  .status-pending {
+    color: red;
+    font-style: bold;
+  }
+  
+  .status-processing {
+    color: rgb(240, 151, 42);
+    font-style: bold;
+  }
+  
+  .status-shipped {
+    color: blue;
+    font-style: bold;
+  }
+  
+  .status-delivered {
+    color: rgb(84, 242, 84);
+    font-style: bold;
+  }
+  
+  /* User guide styling */
+  #user-guide {
+    font-size: xx-large;
+    font-weight: 500;
+  }
+  
