@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import "./css/food.css"
+import  AddForm  from './add_menu';
 import EditForm from './edit_menu';
 
 function OrderDetail() {
@@ -14,8 +15,8 @@ function OrderDetail() {
     setSelectedRows(selectedRows.selectedRows);
     console.log(selectedRows.selectedRows)
   };
-  
-  
+
+
   async function fetchData() {
     try {
       const result = await fetch("http://localhost:5000/", {
@@ -66,7 +67,7 @@ function OrderDetail() {
     },
     {
       name: 'Spiceness',
-      selector: row => row.spiciness_level,
+      selector: row => row.spiceness_level,
       sortable: true,
       width: '100px',
 
@@ -127,15 +128,21 @@ function OrderDetail() {
     });
   }, []);
 
+  const handleEdit = () => { 
+    const name = selectedRows[0].name;
+    localStorage.setItem("toEdit",name)
+    console.log(name);
+    navigate('/edit_menu')
+  };
 
   return (
     <div className='fd-main'>
       <div className='head-food'>
         <p id='guide'>Items in Display</p>
         <div>
-          <button className='btn-add' onClick={() => { navigate('/edit_menu') }}>➕</button>
-          <button className='btn-edit' onClick={() => <EditForm dataArray={selectedRows}/>}>🧾</button>
-          <button className='btn-remove' onClick={() => { navigate('/edit_menu') }}>❌</button>
+          <button className='btn-add' onClick={() => { navigate('/add_menu') }}> ➕ </button>
+          <button className='btn-edit' onClick={() => { handleEdit() }}>🧾</button>
+          <button className='btn-remove' onClick={() => { navigate('/edit_menu') }}> ❌ </button>
         </div>
       </div>
 
@@ -154,7 +161,7 @@ function OrderDetail() {
         />
 
       </div>
-    
+
     </div>
   );
 }

@@ -1,27 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import "./css/add_menu.css"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function EditForm(props) {
 
 
-
-    const toEdit = window.localStorage.getItem("toEdit");
-    console.log("Edit Form Called: ", toEdit);
-    loadData();
-
-
-
-    const handleImageSelect = (e) => {
-        const file = e.target.files[0];
-        setSelectedImage(file);
-    };
-    useEffect(() => {
-        console.log("This is selected Image \n:", selectedImage);
-    }, [selectedImage]);
-
-
-
+function AddForm() {
+    const navigate = useNavigate(null)
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -31,61 +16,20 @@ function EditForm(props) {
     const [popular, setPopular] = useState(false);
     const [special, setSpecial] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-
-
-
-
-
-    async function loadData() {
-        try {
-            console.log("Sending request with toEdit data:", toEdit);
     
-            const response = await fetch("http://localhost:5000/menu-edit", {
-                method: "POST",
-                body: JSON.stringify({ toEdit }),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-    
-            const responseData = await response.json();
-            const result = responseData.result; // Access the "result" property
-    
-            console.log("Received data:", result);
-    
-            if (result.length > 0) {
-                const firstItem = result[0]; // Assuming you are interested in the first item
-                console.log("Data from the first item:", firstItem);
-    
-                // Rest of your code to set state variables
-                setName(firstItem.name);
-                setDescription(firstItem.description);
-                setPrice(firstItem.price);
-                setCategory(firstItem.category);
-                setSpicinessLevel(firstItem.spiciness_level);
-                setVegan(firstItem.vegan);
-                setPopular(firstItem.popular);
-                setSpecial(firstItem.special);
-                setSelectedImage(firstItem.image_url)
-                console.log("Image Name:",firstItem.image_url);
-            } else {
-                console.log("No data received from the API.");
-            }
-        } catch (error) {
-            console.error("Error:", error.message);
-        }
+    const handleImageSelect = (e) => {
+        const file = e.target.files[0];
+        setSelectedImage(file);
     };
-    
+
+    useEffect(() => {
+        console.log("This is selected Image \n:",selectedImage);
+    }, [selectedImage]);
 
 
-
-
-    const handleMenu = async (e) => {
+    const AddMenu = async (e) => {
         e.preventDefault();
+    
         try {
             const formData = new FormData();
             formData.append('name', name);
@@ -96,46 +40,46 @@ function EditForm(props) {
             formData.append('vegan', vegan);
             formData.append('popular', popular);
             formData.append('special', special);
-
+    
             if (selectedImage) {
                 formData.append('admin', selectedImage);
             }
-
+    
             const response = await axios.post('http://localhost:5000/add-menu', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-
+    
             console.log(response.data);
-            // navigate('/food')
+            navigate('/food')
             alert("Item added successfully")
         } catch (error) {
             console.error(error);
             alert("Item couldn't be added.")
         }
     };
-
-
+    
+      
 
     return (
-        <form onSubmit={handleMenu} enctype="multipart/form-data" method='POST'>
+        <form onSubmit={AddMenu} enctype="multipart/form-data" method='POST'>
             <div className='form-container'>
                 <h2>Upload Image</h2>
                 <input
                     type="file"
                     accept="image/*" // Allow only image files
                     onChange={handleImageSelect}
-
+                    
                 />
                 {selectedImage && (
                     <div>
                         <h3>Selected Image:</h3>
                         <img
-                            src={`http://localhost:5000/${selectedImage}`}
+                            src={URL.createObjectURL(selectedImage)}
                             alt="Selected"
                             style={{ maxWidth: '100%', maxHeight: '300px' }}
-
+                            
                         />
                     </div>
                 )}
@@ -208,9 +152,6 @@ function EditForm(props) {
             <button type="submit">Save</button>
         </form>
     );
-
-
-
-
 }
-export default EditForm;
+
+export default AddForm;
