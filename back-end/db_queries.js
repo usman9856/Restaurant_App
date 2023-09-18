@@ -142,7 +142,7 @@ const getSpecificMenuDB = async (query) => {
     }
 };
 
-const setMenuDB = async (query) => {
+const setMenuDB = async (query) => {has
     try {
         const data = new db_menu(query); // Create a new instance of the model
         const result = await data.save(); // Save the instance to the database
@@ -153,6 +153,29 @@ const setMenuDB = async (query) => {
     }
 };
 
+const updateMenuDB = async (name, query) => {
+    
+    console.log("Query: ", name);
+    try {
+     const result = await db_menu.updateOne({ name: name }, { $set: {
+        name:query.name,
+        description:query.description,
+        price: query.price,
+        category:query.category,
+        image_url:query.image_url,
+        spiceness_level:query.spiceness_level,
+        vegan: query.vegan,
+        popular: query.popular,
+        special: query.special
+      } })
+
+      return result;
+    } catch (error) {
+      console.error('Error updating menu data:', error);
+      throw error;
+    }
+  };
+  
 const getStaffDB = async () => {
     try {
         const data = await db_staff.find({});
@@ -209,4 +232,5 @@ const getOrderDB = async (query) => {
 
 
 
-module.exports = { getMenuDB, setAccountDB, findAccountDB, setOrderDB, getOrderDB,getStaffDB,setMenuDB,getSpecificMenuDB };
+module.exports = { getMenuDB, setAccountDB, findAccountDB, 
+setOrderDB, getOrderDB,getStaffDB,setMenuDB,getSpecificMenuDB,updateMenuDB };

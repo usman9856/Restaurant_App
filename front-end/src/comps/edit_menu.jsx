@@ -2,13 +2,65 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function EditForm(props) {
+function EditForm() {
 
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [category, setCategory] = useState('');
+    const [spiceness_level, setSpicinessLevel] = useState('');
+    const [vegan, setVegan] = useState(false);
+    const [popular, setPopular] = useState(false);
+    const [special, setSpecial] = useState(false);
 
+    useEffect(() => {
+        const toEdit = window.localStorage.getItem("toEdit");
+        async function loadData() {
+            try {
+                console.log("Sending request with toEdit data:", toEdit);
 
-    const toEdit = window.localStorage.getItem("toEdit");
-    console.log("Edit Form Called: ", toEdit);
-    loadData();
+                const response = await fetch("http://localhost:5000/menu-edit", {
+                    method: "POST",
+                    body: JSON.stringify({ toEdit }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const responseData = await response.json();
+                const result = responseData.result;
+
+                console.log("Received data:", result);
+
+                if (result.length > 0) {
+                    const firstItem = result[0];
+
+                    setName(firstItem.name);
+                    setDescription(firstItem.description);
+                    setPrice(firstItem.price);
+                    setCategory(firstItem.category);
+                    setSpicinessLevel(firstItem.spiciness_level);
+                    setVegan(firstItem.vegan);
+                    setPopular(firstItem.popular);
+                    setSpecial(firstItem.special);
+                    setSelectedImage(firstItem.image_url);
+                    console.log("Image Name:", firstItem.image_url);
+                } else {
+                    console.log("No data received from the API.");
+                }
+            } catch (error) {
+                console.error("Error:", error.message);
+            }
+        }
+
+        // Load data only when the component mounts
+        loadData();
+    }, []);
 
 
 
@@ -19,69 +71,6 @@ function EditForm(props) {
     useEffect(() => {
         console.log("This is selected Image \n:", selectedImage);
     }, [selectedImage]);
-
-
-
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
-    const [category, setCategory] = useState('');
-    const [spiceness_level, setSpicinessLevel] = useState('');
-    const [vegan, setVegan] = useState(false);
-    const [popular, setPopular] = useState(false);
-    const [special, setSpecial] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
-
-
-
-
-
-    async function loadData() {
-        try {
-            console.log("Sending request with toEdit data:", toEdit);
-    
-            const response = await fetch("http://localhost:5000/menu-edit", {
-                method: "POST",
-                body: JSON.stringify({ toEdit }),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-    
-            const responseData = await response.json();
-            const result = responseData.result; // Access the "result" property
-    
-            console.log("Received data:", result);
-    
-            if (result.length > 0) {
-                const firstItem = result[0]; // Assuming you are interested in the first item
-                console.log("Data from the first item:", firstItem);
-    
-                // Rest of your code to set state variables
-                setName(firstItem.name);
-                setDescription(firstItem.description);
-                setPrice(firstItem.price);
-                setCategory(firstItem.category);
-                setSpicinessLevel(firstItem.spiciness_level);
-                setVegan(firstItem.vegan);
-                setPopular(firstItem.popular);
-                setSpecial(firstItem.special);
-                setSelectedImage(firstItem.image_url)
-                console.log("Image Name:",firstItem.image_url);
-            } else {
-                console.log("No data received from the API.");
-            }
-        } catch (error) {
-            console.error("Error:", error.message);
-        }
-    };
-    
-
-
 
 
     const handleMenu = async (e) => {
@@ -98,21 +87,27 @@ function EditForm(props) {
             formData.append('special', special);
 
             if (selectedImage) {
-                formData.append('admin', selectedImage);
+                formData.append('image', selectedImage); // Use 'image' instead of 'admin'
             }
 
-            const response = await axios.post('http://localhost:5000/add-menu', formData, {
+            const response=axios.put(`http://localhost:5000/menu-edit/${name}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
+            // console.log(response)
 
-            console.log(response.data);
-            // navigate('/food')
-            alert("Item added successfully")
+            if (response) {
+
+                alert("Item updated successfully");
+            }
+            else {
+                alert("Item couldn't be updated.");
+
+            }
         } catch (error) {
             console.error(error);
-            alert("Item couldn't be added.")
+            alert("Item couldn't be updated.");
         }
     };
 

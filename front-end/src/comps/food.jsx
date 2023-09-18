@@ -142,7 +142,7 @@ function OrderDetail() {
         <div>
           <button className='btn-add' onClick={() => { navigate('/add_menu') }}> ➕ </button>
           <button className='btn-edit' onClick={() => { handleEdit() }}>🧾</button>
-          <button className='btn-remove' onClick={() => { navigate('/edit_menu') }}> ❌ </button>
+          <button className='btn-remove' onClick={() => { navigate('/delete_menu') }}> ❌ </button>
         </div>
       </div>
 
