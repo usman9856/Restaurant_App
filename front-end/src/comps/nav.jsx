@@ -27,7 +27,7 @@ function NavbarComponent() {
     const adminNavDetails = [
         { label: "Home", path: "/homepage_admin" },
         { label: "Food", path: "/food" },
-        { label: "Employee", path: "/employee" },
+        { label: "Staff", path: "/staff" },
     ];
 
     return (

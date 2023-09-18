@@ -130,6 +130,62 @@ const getMenuDB = async () => {
     }
 };
 
+const getSpecificMenuDB = async (query) => {
+    try {
+        console.log('query', query);
+        const data = await db_menu.find(query);
+        console.log('data', data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching menu data:', error);
+        throw error; // Rethrow the error so you can see the specific MongoDB error
+    }
+};
+
+const setMenuDB = async (query) => {has
+    try {
+        const data = new db_menu(query); // Create a new instance of the model
+        const result = await data.save(); // Save the instance to the database
+        console.log("Data has been saved:", result);
+    } catch (error) {
+        console.error('Error Saving Account Data:', error);
+        throw error; // Rethrow the error to handle it in the calling code
+    }
+};
+
+const updateMenuDB = async (name, query) => {
+    
+    console.log("Query: ", name);
+    try {
+     const result = await db_menu.updateOne({ name: name }, { $set: {
+        name:query.name,
+        description:query.description,
+        price: query.price,
+        category:query.category,
+        image_url:query.image_url,
+        spiceness_level:query.spiceness_level,
+        vegan: query.vegan,
+        popular: query.popular,
+        special: query.special
+      } })
+
+      return result;
+    } catch (error) {
+      console.error('Error updating menu data:', error);
+      throw error;
+    }
+  };
+  
+const getStaffDB = async () => {
+    try {
+        const data = await db_staff.find({});
+        return data;
+    } catch (error) {
+        console.error('Error fetching menu data:', error);
+        return []; // Return an empty array or handle the error as needed
+    }
+};
+
 const setAccountDB = async (req) => {
     try {
         const data = new db_account(req.body); // Create a new instance of the model
@@ -149,7 +205,7 @@ const findAccountDB = async (query) => {
         console.error('Error fetching account data:', error);
         throw error; // Rethrow the error to handle it in the calling code
     }
-}
+};
 
 const setOrderDB = async (query) => {
     try {
@@ -161,7 +217,6 @@ const setOrderDB = async (query) => {
         throw error; // Rethrow the error to handle it in the calling code
     }
 };
-
 
 const getOrderDB = async (query) => {
     try {
@@ -177,4 +232,5 @@ const getOrderDB = async (query) => {
 
 
 
-module.exports = { getMenuDB, setAccountDB, findAccountDB, setOrderDB, getOrderDB };
+module.exports = { getMenuDB, setAccountDB, findAccountDB, 
+setOrderDB, getOrderDB,getStaffDB,setMenuDB,getSpecificMenuDB,updateMenuDB };

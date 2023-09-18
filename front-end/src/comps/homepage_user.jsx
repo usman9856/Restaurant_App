@@ -35,7 +35,6 @@ export default function Homepage() {
       key={index}
       name={dish.name}
       description={dish.description}
-      // detail={dish.detail} // You need to have the detail field in your menu data
       price={`$${dish.price}`}
       category={dish.category}
       image_url={`${dish.image_url}`}

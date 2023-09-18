@@ -4,8 +4,9 @@
   "description": "Restaurant app server side application",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  },  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/usman9856/Restaurant_App.git"

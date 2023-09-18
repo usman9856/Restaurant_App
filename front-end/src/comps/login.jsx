@@ -39,14 +39,14 @@ const Login = () => {
         <input className='input-box'
         required
           type="email"
-          placeholder="Email"
+          placeholder="user@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input className='input-box'
         required
           type="password"
-          placeholder="Password"
+          placeholder="abc123"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
