@@ -9,7 +9,7 @@ const Login_Admin = () => {
   const navigate = useNavigate(); // Hook for navigation
   const handleAdmin = async (e) => {
     e.preventDefault()
-    let result = await fetch("http://localhost:5000/login", {
+    let result = await fetch(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/login`, {
       method: "POST",
       body: JSON.stringify({ email, password,role}),
       headers: {

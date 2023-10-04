@@ -22,7 +22,7 @@ function MCard(props) {
           {imageLoaded ? (
             <img
             className='card-img-top img-size'
-            src={`http://localhost:5000/${props.image_url}`}
+            src={`http://${process.env.REACT_APP_PUBLIC_IP}:5000/${props.image_url}`}
             alt="item-image"
             onError={() => console.error("Image failed to load")}
           />

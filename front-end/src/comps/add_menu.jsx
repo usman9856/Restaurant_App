@@ -45,7 +45,8 @@ function AddForm() {
                 formData.append('admin', selectedImage);
             }
     
-            const response = await axios.post('http://localhost:5000/add-menu', formData, {
+            // const response = await axios.post('http://localhost:5000/add-menu', formData, {
+            const response = await axios.post(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/add-menu`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

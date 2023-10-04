@@ -15,7 +15,7 @@ function Staff() {
 
     async function fetchData() {
         try {
-            const result = await fetch("http://localhost:5000/staff", {
+            const result = await fetch(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/staff`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

@@ -20,7 +20,7 @@ function EditForm() {
             try {
                 console.log("Sending request with toEdit data:", toEdit);
 
-                const response = await fetch("http://localhost:5000/menu-edit", {
+                const response = await fetch(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/menu-edit`, {
                     method: "POST",
                     body: JSON.stringify({ toEdit }),
                     headers: {
@@ -90,7 +90,7 @@ function EditForm() {
                 formData.append('image', selectedImage); // Use 'image' instead of 'admin'
             }
 
-            const response=axios.put(`http://localhost:5000/menu-edit/${name}`, formData, {
+            const response=axios.put(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/menu-edit/${name}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -127,7 +127,7 @@ function EditForm() {
                     <div>
                         <h3>Selected Image:</h3>
                         <img
-                            src={`http://localhost:5000/${selectedImage}`}
+                            src={`http://${process.env.REACT_APP_PUBLIC_IP}/${selectedImage}`}
                             alt="Selected"
                             style={{ maxWidth: '100%', maxHeight: '300px' }}
 

@@ -21,7 +21,7 @@ function AdminPage() {
   
   async function fetchData() {
     try {
-      const result = await fetch("http://localhost:5000/orders", {
+      const result = await fetch(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/orders`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

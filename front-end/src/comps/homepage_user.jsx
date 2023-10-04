@@ -3,6 +3,7 @@ import MCard from "./menuCard";
 // import { NavbarComponent_user } from "./nav";
 import "./css/homepage_user.css";
 import Resdetail from "./footer";
+// import "../../.env"
 
 export default function Homepage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,12 +15,14 @@ export default function Homepage() {
 
   const displayDish = async () => {
     try {
-      const result = await fetch("http://localhost:5000/", {
+      // const result = await fetch("http://localhost:5000/", {
+       const result = await fetch(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
+      console.log(process.env);
 
       const data = await result.json();
       setMenuData(data);

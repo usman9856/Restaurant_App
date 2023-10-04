@@ -18,7 +18,7 @@ const Signup = () => {
     e.preventDefault();
    
       
-    let result = await fetch("http://localhost:5000/register", {
+    let result = await fetch(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/register`, {
       method: "POST",
       body: JSON.stringify({ email, password, first_name, last_name, phone_number, age, role, address }),
       headers: {
