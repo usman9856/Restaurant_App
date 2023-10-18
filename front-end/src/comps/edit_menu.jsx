@@ -127,7 +127,7 @@ function EditForm() {
                     <div>
                         <h3>Selected Image:</h3>
                         <img
-                            src={`http://${process.env.REACT_APP_PUBLIC_IP}/${selectedImage}`}
+                            src={`http://${process.env.REACT_APP_PUBLIC_IP}:5000/${selectedImage}`}
                             alt="Selected"
                             style={{ maxWidth: '100%', maxHeight: '300px' }}
 

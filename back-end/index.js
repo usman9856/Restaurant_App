@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path')
 const { getMenuDB, setAccountDB, findAccountDB, setOrderDB, 
-  getOrderDB, getStaffDB, setMenuDB, getSpecificMenuDB,updateMenuDB } = require('./db_queries');
+  getOrderDB, getStaffDB, setMenuDB, getSpecificMenuDB,
+  updateMenuDB,deleteMenuDB } = require('./db_queries');
 const app = express();
 const cors = require('cors');
 app.use(express.json());
@@ -181,3 +182,27 @@ app.get('/staff', async (req, res) => {
   }
 });
 
+
+
+// app.delete('/delete_menu', async (req, res) => {
+//   res.send("Delete API Called with data: ",req.body)
+// });
+
+app.delete('/delete_menu', async (req, res) => {
+  const data = req.body;
+  console.log(data);
+  try {
+    const orders = await deleteMenuDB(data);
+    if (orders.acknowledged) {
+      res.status(200).json({ message: 'Item Deleted Succesfully' });
+      return;
+    }
+    else {
+      res.status(500).json({ error: 'Failed to Delete Item' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+
+
+});

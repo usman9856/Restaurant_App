@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const ObjectId = mongoose.Types.ObjectId;
+
+
 
 const menuSchema = new mongoose.Schema({
     name: String,
@@ -142,7 +145,7 @@ const getSpecificMenuDB = async (query) => {
     }
 };
 
-const setMenuDB = async (query) => {has
+const setMenuDB = async (query) => {
     try {
         const data = new db_menu(query); // Create a new instance of the model
         const result = await data.save(); // Save the instance to the database
@@ -227,10 +230,27 @@ const getOrderDB = async (query) => {
         throw error; // Rethrow the error to handle it in the calling code
     }
 }
-
-
+const deleteMenuDB = async (query) => {
+    console.log(query);
+    try {
+        const objectId = new ObjectId(query.Id);
+        console.log('Query ID: ', query.Id);
+        console.log('Object ID: ', objectId);
+        const result = await db_order.findByIdAndDelete(objectId);
+        console.log(result);
+        if (result !== null) {
+            return { acknowledged: true };
+        } else {
+            return { acknowledged: false, message: 'Data not found' };
+        }
+    } catch (error) {
+        console.error('Error deleting data:', error);
+        throw error;
+    }
+}
 
 
 
 module.exports = { getMenuDB, setAccountDB, findAccountDB, 
-setOrderDB, getOrderDB,getStaffDB,setMenuDB,getSpecificMenuDB,updateMenuDB };
+setOrderDB, getOrderDB,getStaffDB,setMenuDB,getSpecificMenuDB,
+updateMenuDB,deleteMenuDB };

@@ -6,7 +6,8 @@ const connectDB = async () => {
             // await mongoose.connect('mongodb://localhost:27017/Restaurant-App');
             // await mongoose.connect('mongodb+srv://um50766:kd0Jr8cwOJoQ8Yc6@cluster0.ajs32rc.mongodb.net/Restaurant-App');
             // await mongoose.connect('mongodb+srv://um50765:XgOj1xV9McNDBpb5@cluster0.ajs32rc.mongodb.net/Restaurant-App');
-            await mongoose.connect('mongodb+srv://um50765:XgOj1xV9McNDBpb5@cluster0.ndipuon.mongodb.net/Restaurant-App');
+            // await mongoose.connect('mongodb+srv://um50765:XgOj1xV9McNDBpb5@cluster0.ndipuon.mongodb.net/Restaurant-App');
+            await mongoose.connect('mongodb+srv://um50765:XgOj1xV9McNDBpb5@cluster0.ndipuon.mongodb.net/Restaurant-App?retryWrites=true&w=majority');
 
             console.log('Database Connected!');
         } else {
