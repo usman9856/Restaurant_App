@@ -58,7 +58,7 @@ function AdminPage() {
             <div key={product._id}>
               {product.product_name} - Quantity: {product.quantity}
             </div>
-          ))
+          )) 
         ) : (
           <div>No Products</div>
         ),
