@@ -61,23 +61,31 @@
   
   /* Status styles based on order status */
   .status-pending {
-    color: red;
-    font-style: bold;
+    background-color: red;
+    color: white;    
+    width: 70px;
+    height: 20px;
   }
   
   .status-processing {
-    color: rgb(240, 151, 42);
-    font-style: bold;
+    background-color: rgb(240, 151, 42);
+    color: white;    
+    width: 70px;
+    height: 20px;
   }
   
   .status-shipped {
-    color: blue;
-    font-style: bold;
+    background-color: blue;
+    color: white;    
+    width: 70px;
+    height: 20px;
   }
   
   .status-delivered {
-    color: rgb(84, 242, 84);
-    font-style: bold;
+    background-color: rgb(84, 242, 84);
+    color: white;    
+    width: 70px;
+    height: 20px;
   }
   
   /* User guide styling */

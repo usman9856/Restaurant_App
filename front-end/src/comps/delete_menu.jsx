@@ -87,7 +87,6 @@ function DeleteForm() {
     
       if (response.status === 200) {
         const data = response.data;
-        console.log(data); // The response from the server
         alert(response.message)
         navigate('/food')
       } else {

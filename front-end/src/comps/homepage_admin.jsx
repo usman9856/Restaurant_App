@@ -34,17 +34,17 @@ function AdminPage() {
       return []; // Return an empty array or handle the error appropriately.
     }
   }
-
+  
   const columns = [
     {
       name: 'Customer Name',
-      selector: (row) => `${row.customer.first_name} ${row.customer.last_name}`,
+      selector: (row) => `${row.customer_Id}`,
       sortable: true,
       width: '150px',
     },
     {
       name: 'Contact',
-      selector: (row) => row.customer.contact,
+      selector: (row) => row.customer_contact,
       sortable: true,
       width: '200px',
     },
@@ -53,13 +53,18 @@ function AdminPage() {
       selector: 'products',
       sortable: false,
       cell: (row) =>
-        row.products.map((product) => (
-          <div key={product._id}>
-            {product.product.name} - Quantity: {product.quantity}
-          </div>
-        )),
+        Array.isArray(row.products) ? (
+          row.products.map((product) => (
+            <div key={product._id}>
+              {product.product_name} - Quantity: {product.quantity}
+            </div>
+          ))
+        ) : (
+          <div>No Products</div>
+        ),
       width: '250px',
     },
+    
     {
       name: 'Order Date',
       selector: 'orderDate',
@@ -72,7 +77,7 @@ function AdminPage() {
       selector: 'totalAmount',
       sortable: true,
       cell: (row) => `$${row.totalAmount.toFixed(2)}`,
-      width: '100px',
+      width: '150px',
     },
     {
       name: 'Shipping Address',
@@ -105,21 +110,17 @@ function AdminPage() {
             break;
         }
   
-        return <div className={statusClass}>{row.status}</div>;
+        return <center><div className={statusClass}>{row.status}</div></center>
       },
     },
   ];
   
-
   useEffect(() => {
     fetchData().then((data) => {
-      const mappedData = data.map((order, index) => ({
-        id: index + 1,
-        customer: {
-          first_name: order.customer.first_name,
-          last_name: order.customer.last_name,
-          contact: order.customer.contact,
-        },
+      const mappedData = data.map((order) => ({
+        id: order._id.$oid, // Assuming the MongoDB ObjectID is provided in this format
+        customer_Id: order.customer_Id,
+        customer_contact: order.customer_contact,
         products: order.products,
         orderDate: order.orderDate,
         totalAmount: order.totalAmount,

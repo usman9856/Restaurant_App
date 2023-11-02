@@ -60,39 +60,32 @@ const staffSchema = new mongoose.Schema({
 });
 
 const orderSchema = new mongoose.Schema({
-    customer: {
-        customer_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Account', // Reference to the Account model for the customer
-            required: true,
-        },
-        first_name: {
-            type: String, // Store the customer's name
-            required: true,
-        },
-        last_name: {
-            type: String, // Store the customer's name
-            required: true,
-        },
-        contact: {
-            type: String, // Store the customer's name
-            required: true,
-        },
+    customer_Id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
     },
-    products: [
-        {
-            product: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Product', // Reference to a Product model for each product in the order
-                required: true,
-            },
-            quantity: {
-                type: Number,
-                required: true,
-                min: 1, // Minimum quantity allowed per product
-            },
-        },
-    ],
+    customer_name: {
+        type: String,
+        required: true,
+    },
+    customer_contact: {
+        type: String,
+        required: true,
+    },
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product', // Reference to a Product model for each product in the order
+        required: true,
+    },
+    product_name: {
+        type: String,
+        required: true,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        min: 1, // Minimum quantity allowed per product
+    },
     orderDate: {
         type: Date,
         default: Date.now,
@@ -115,6 +108,62 @@ const orderSchema = new mongoose.Schema({
     },
 });
 
+// const orderSchema = new mongoose.Schema({
+//     customer: {
+//         customer_id: {
+//             type: mongoose.Schema.Types.ObjectId,
+//             ref: 'Account', // Reference to the Account model for the customer
+//             required: true,
+//         },
+//         first_name: {
+//             type: String, // Store the customer's name
+//             required: true,
+//         },
+//         last_name: {
+//             type: String, // Store the customer's name
+//             required: true,
+//         },
+//         contact: {
+//             type: String, // Store the customer's name
+//             required: true,
+//         },
+//     },
+//     products: [
+//         {
+//             product: {
+//                 type: mongoose.Schema.Types.ObjectId,
+//                 ref: 'Product', // Reference to a Product model for each product in the order
+//                 required: true,
+//             },
+//             quantity: {
+//                 type: Number,
+//                 required: true,
+//                 min: 1, // Minimum quantity allowed per product
+//             },
+//         },
+//     ],
+//     orderDate: {
+//         type: Date,
+//         default: Date.now,
+//     },
+//     totalAmount: {
+//         type: Number,
+//         required: true,
+//         min: 0,
+//     },
+//     shippingAddress: {
+//         // type: mongoose.Schema.Types.ObjectId,
+//         type: String,
+//         ref: 'Account', // Reference to the Account model for the shipping address
+//         required: true,
+//     },
+//     status: {
+//         type: String,
+//         enum: ['Pending', 'Processing', 'Shipped', 'Delivered'],
+//         default: 'Pending',
+//     },
+// });
+
 
 const db_menu = mongoose.model('menu-items', menuSchema);
 const db_account = mongoose.model('accounts', accountSchema);
@@ -135,9 +184,9 @@ const getMenuDB = async () => {
 
 const getSpecificMenuDB = async (query) => {
     try {
-        console.log('query', query);
+        // console.log('query', query);
         const data = await db_menu.find(query);
-        console.log('data', data);
+        // console.log('data', data);
         return data;
     } catch (error) {
         console.error('Error fetching menu data:', error);
@@ -156,29 +205,34 @@ const setMenuDB = async (query) => {
     }
 };
 
-const updateMenuDB = async (name, query) => {
-    
-    console.log("Query: ", name);
+const updateMenuDB = async (query) => {
+    console.log("Query called from update menu:", query);
     try {
-     const result = await db_menu.updateOne({ name: name }, { $set: {
-        name:query.name,
-        description:query.description,
-        price: query.price,
-        category:query.category,
-        image_url:query.image_url,
-        spiceness_level:query.spiceness_level,
-        vegan: query.vegan,
-        popular: query.popular,
-        special: query.special
-      } })
-
-      return result;
+        const result = await db_menu.findByIdAndUpdate(
+            { _id: query._id },
+            {
+                $set: {
+                    name: query.name,
+                    description: query.description,
+                    price: query.price,
+                    category: query.category,
+                    image_url: query.image_url,
+                    spiceness_level: query.spiceness_level,
+                    vegan: query.vegan,
+                    popular: query.popular,
+                    special: query.special
+                }
+            }
+        );
+        console.log("Updated menu:", result);
+        return result; // Returning the update result if needed
     } catch (error) {
-      console.error('Error updating menu data:', error);
-      throw error;
+        console.error("Error occurred while updating the menu:", error);
+        throw error; // Throw the error for handling in the calling function
     }
-  };
-  
+};
+
+
 const getStaffDB = async () => {
     try {
         const data = await db_staff.find({});
@@ -230,19 +284,15 @@ const getOrderDB = async (query) => {
         throw error; // Rethrow the error to handle it in the calling code
     }
 }
+
 const deleteMenuDB = async (query) => {
     console.log(query);
     try {
         const objectId = new ObjectId(query.Id);
         console.log('Query ID: ', query.Id);
         console.log('Object ID: ', objectId);
-        const result = await db_order.findByIdAndDelete(objectId);
-        console.log(result);
-        if (result !== null) {
-            return { acknowledged: true };
-        } else {
-            return { acknowledged: false, message: 'Data not found' };
-        }
+        return await db_menu.deleteOne({ '_id': query.Id });
+
     } catch (error) {
         console.error('Error deleting data:', error);
         throw error;
@@ -251,6 +301,8 @@ const deleteMenuDB = async (query) => {
 
 
 
-module.exports = { getMenuDB, setAccountDB, findAccountDB, 
-setOrderDB, getOrderDB,getStaffDB,setMenuDB,getSpecificMenuDB,
-updateMenuDB,deleteMenuDB };
+module.exports = {
+    getMenuDB, setAccountDB, findAccountDB,
+    setOrderDB, getOrderDB, getStaffDB, setMenuDB, getSpecificMenuDB,
+    updateMenuDB, deleteMenuDB
+};

@@ -4,8 +4,7 @@ const connectDB = require('./db_link');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path')
-const { getMenuDB, setAccountDB, findAccountDB, setOrderDB, 
-  getOrderDB, getStaffDB, setMenuDB, getSpecificMenuDB,
+const { getMenuDB, setAccountDB, findAccountDB, setOrderDB, getOrderDB, getStaffDB, setMenuDB, getSpecificMenuDB,
   updateMenuDB,deleteMenuDB } = require('./db_queries');
 const app = express();
 const cors = require('cors');
@@ -48,7 +47,7 @@ app.post('/add-menu', upload, async (req, res) => {
   req.body.image_url = image_url;
   try {
     await setMenuDB(req.body);
-    console.log("Added Menu Data:", req.body);
+    // console.log("Added Menu Data:", req.body);
     res.send("add-menu called");
   } catch (error) {
     console.error("Error setting menu data in the database:", error);
@@ -60,7 +59,7 @@ app.post('/add-menu', upload, async (req, res) => {
 app.post('/register', async (req, res) => {
   // await connectDB();
   try {
-    console.log("Register User Account: ",req.body)
+    // console.log("Register User Account: ",req.body)
     const result = await findAccountDB({ email: req.body.email });
     if (result.length > 0) {
       res.status(409).json({ error: 'Email already exists' }); // Respond with an error message
@@ -147,27 +146,27 @@ app.post("/menu-edit", async (req, res) => {
 });
 
 //update menu API
-app.put("/menu-edit/:name", async (req, res) => {
-  const menuName = req.params.name; // Extract the menu name from the URL
-  console.log("This is parameter name send: ",menuName);
+
+app.put("/menu-edit", upload, async (req, res) => {
+  console.log("Menu edit: ", req.body._id)
   try {
-    const result = await updateMenuDB(menuName, req.body);
-    console.log("This is Result: ",result);
-    if (!result.acknowledged) {
-      res.status(500).json({ error: 'Update Failed' });
-    } else if (result.nModified === 0) {
-      res.status(404).json({ error: 'Menu Not Found' });
+    if (req.body._id) {
+      await updateMenuDB(req.body); // If _id exists in req.body
+      return res.status(200).json({ message: "Menu updated successfully" });
     } else {
-      res.status(200).json({ message: 'Menu updated successfully' });
+      return res.status(400).json({ error: "Invalid _id in request" });
     }
   } catch (error) {
-    console.error("Error updating menu:", error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Error occurred while updating the menu:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
+
+
 //api to get staff data 
 app.get('/staff', async (req, res) => {
+  console.log("Staff.Get Menu Called");
   try {
     const orders = await getStaffDB();
     if (!orders) {
@@ -182,15 +181,10 @@ app.get('/staff', async (req, res) => {
   }
 });
 
-
-
-// app.delete('/delete_menu', async (req, res) => {
-//   res.send("Delete API Called with data: ",req.body)
-// });
-
+//API to delete menudata 
 app.delete('/delete_menu', async (req, res) => {
+  console.log("Delete_Menu.delete Called");
   const data = req.body;
-  console.log(data);
   try {
     const orders = await deleteMenuDB(data);
     if (orders.acknowledged) {

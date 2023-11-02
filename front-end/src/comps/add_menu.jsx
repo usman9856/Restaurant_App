@@ -44,14 +44,11 @@ function AddForm() {
             if (selectedImage) {
                 formData.append('admin', selectedImage);
             }
-    
-            // const response = await axios.post('http://localhost:5000/add-menu', formData, {
             const response = await axios.post(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/add-menu`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-    
             console.log(response.data);
             navigate('/food')
             alert("Item added successfully")
@@ -61,8 +58,6 @@ function AddForm() {
         }
     };
     
-      
-
     return (
         <form onSubmit={AddMenu} enctype="multipart/form-data" method='POST'>
             <div className='form-container'>

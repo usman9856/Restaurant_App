@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function EditForm() {
-
+    const [_id, setId] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -13,13 +13,14 @@ function EditForm() {
     const [vegan, setVegan] = useState(false);
     const [popular, setPopular] = useState(false);
     const [special, setSpecial] = useState(false);
+    const navigate = new useNavigate();
 
     useEffect(() => {
+
         const toEdit = window.localStorage.getItem("toEdit");
         async function loadData() {
             try {
                 console.log("Sending request with toEdit data:", toEdit);
-
                 const response = await fetch(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/menu-edit`, {
                     method: "POST",
                     body: JSON.stringify({ toEdit }),
@@ -27,19 +28,15 @@ function EditForm() {
                         "Content-Type": "application/json",
                     },
                 });
-
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-
                 const responseData = await response.json();
                 const result = responseData.result;
-
                 console.log("Received data:", result);
-
                 if (result.length > 0) {
                     const firstItem = result[0];
-
+                    setId(firstItem._id);
                     setName(firstItem.name);
                     setDescription(firstItem.description);
                     setPrice(firstItem.price);
@@ -57,26 +54,24 @@ function EditForm() {
                 console.error("Error:", error.message);
             }
         }
-
-        // Load data only when the component mounts
         loadData();
+
     }, []);
-
-
 
     const handleImageSelect = (e) => {
         const file = e.target.files[0];
         setSelectedImage(file);
     };
+
     useEffect(() => {
         console.log("This is selected Image \n:", selectedImage);
     }, [selectedImage]);
-
 
     const handleMenu = async (e) => {
         e.preventDefault();
         try {
             const formData = new FormData();
+            formData.append('_id', _id);
             formData.append('name', name);
             formData.append('description', description);
             formData.append('price', price);
@@ -85,36 +80,33 @@ function EditForm() {
             formData.append('vegan', vegan);
             formData.append('popular', popular);
             formData.append('special', special);
-
             if (selectedImage) {
                 formData.append('image', selectedImage); // Use 'image' instead of 'admin'
             }
-
-            const response=axios.put(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/menu-edit/${name}`, formData, {
+            const response= await axios.put(`http://${process.env.REACT_APP_PUBLIC_IP}:5000/menu-edit`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            // console.log(response)
-
+            console.log(response);
             if (response) {
-
                 alert("Item updated successfully");
+                navigate("/food");
             }
             else {
-                alert("Item couldn't be updated.");
-
+                alert(`Item couldn't be updated.`);
+                navigate("/food");
             }
         } catch (error) {
-            console.error(error);
-            alert("Item couldn't be updated.");
+            alert(`Item couldn't be updated. ${console.error(error)}`);
+            navigate("/food");            
         }
     };
 
 
 
     return (
-        <form onSubmit={handleMenu} enctype="multipart/form-data" method='POST'>
+        <form onSubmit={handleMenu} enctype="multipart/form-data" method='PUT'>
             <div className='form-container'>
                 <h2>Upload Image</h2>
                 <input
